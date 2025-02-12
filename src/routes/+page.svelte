@@ -37,23 +37,37 @@
 		}[];
 	};
 
+	let year: number = 2023;
+
 	let chart1: ChartData = {
-		labels: ['A', 'B', 'C', 'D'],
+		labels: data.map((element) => element.year),
 		datasets: [
 			{
-				label: 'Linija 1',
+				label: 'male',
 				fill: false,
 				borderColor: 'rgb(54, 162, 235)',
-				data: [14, 1, 3, 15]
+				data: data.map((element) => element.m)
 			},
 			{
-				label: 'Linija 2',
+				label: 'female',
 				fill: false,
 				borderColor: 'rgb(255, 99, 132)',
-				data: [12, 9, 30, 1]
+				data: data.map((element) => element.f)
 			}
 		]
 	};
+
+	let chart2: ChartData = {
+		labels: ['m', 'f'],
+		datasets: [
+			{
+				data: [12, 23],
+
+				backgroundColor: ['rgb(124,12,124)', 'rgb(12,12,12)']
+			}
+		]
+	};
+	console.log(data.map((element) => [element.year]));
 </script>
 
 <div class="container mx-auto">
@@ -62,5 +76,14 @@
 			<h2 class="text-center text-2xl text-violet-700 font-bold">Graf podatkov</h2>
 			<Line data={chart1} options={{ responsive: true }} />
 		</div>
+		<div class="border-4 border-violet-200 p-3">
+			<h2 class="text-center text-2xl text-violet-700 font-bold">Graf podatkov</h2>
+			<input class="border border-black w-full text-center" type="numbe" bind:value={year} />
+			<Pie data={chart2} options={{ responsive: true }} />
+		</div>
 	</div>
 </div>
+
+{#each data as year}
+	<p>{year.year} rojenih: {year.f} deklet in {year.m} fantov</p>
+{/each}
